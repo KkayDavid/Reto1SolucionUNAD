@@ -38,10 +38,11 @@ app = FastAPI(title="Correo Gestión - Backend")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:3000",
-        "https://reto1-solucion-unad.vercel.app"
-    ],
+   allow_origins=[
+    "http://localhost:3000",
+    "https://reto1-solucion-unad.vercel.app",
+    "https://reto1-solucion-unad-7xtrc585d-kkaydavids-projects.vercel.app"
+],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
