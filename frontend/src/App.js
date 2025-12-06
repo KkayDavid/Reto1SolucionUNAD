@@ -114,7 +114,7 @@ export default function App() {
 
   async function fetchEmails() {
     try {
-      const res = await fetch("http://localhost:8000/api/emails");
+      const res = await fetch("https://reto1solucionunad.onrender.com/api/emails");
       const data = await res.json();
 
       const saved = JSON.parse(localStorage.getItem("followDates") || "{}");
@@ -184,7 +184,7 @@ export default function App() {
     if (!selectedEmail) return;
     if (!window.confirm("¿Eliminar este correo?")) return;
     try {
-      await fetch(`http://localhost:8000/api/emails/${selectedEmail.id}`, { method: "DELETE" });
+      await fetch(`https://reto1solucionunad.onrender.com/api/emails/${selectedEmail.id}`, { method: "DELETE" });
       setEmails((prev) => prev.filter((x) => x.id !== selectedEmail.id));
       setSelectedEmail(null);
       setReplyText("");
@@ -208,7 +208,7 @@ export default function App() {
       form.append("subject", subject);
       form.append("message", replyText);
       files.forEach((f) => form.append("files", f));
-      const res = await fetch("http://localhost:8000/api/reply", { method: "POST", body: form });
+      const res = await fetch("https://reto1solucionunad.onrender.com/api/emails", { method: "POST", body: form });
       if (!res.ok) throw new Error(await res.text());
       alert("Respuesta enviada.");
       setReplyText("");
