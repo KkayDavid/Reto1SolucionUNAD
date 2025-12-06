@@ -128,6 +128,9 @@ export default function App() {
       return;
     }
 
+    const data = await res.json();
+    const saved = JSON.parse(localStorage.getItem("followDates") || "{}");
+
     const cleaned = data
       .map((e) => ({
         ...e,
@@ -139,6 +142,7 @@ export default function App() {
       .sort((a, b) => new Date(b.received_at) - new Date(a.received_at));
 
     setEmails(cleaned);
+
   } catch (err) {
     console.error("Error fetch emails", err);
     alert("No se pudo conectar al servidor. Revisa la consola.");
