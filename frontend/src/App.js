@@ -99,12 +99,16 @@ export default function App() {
   const notificationIntervalRef = useRef(null);
 
   useEffect(() => {
+  // llamada inicial inmediata
+  fetchEmails();
+
+  // refrescar cada 10s
   const interval = setInterval(() => {
     fetchEmails();
   }, 10000);
 
   return () => clearInterval(interval);
-}, []);
+}, []); // se ejecuta solo al montar/desmontar
 
 
   function logout() {
@@ -210,43 +214,70 @@ const data = await res.json();
   }
 
  
-  async function handleDelete() {
-    if (!selectedEmail) return;
-    if (!window.confirm("¿Eliminar este correo?")) return;
-    try {
-      await fetch(`https://reto1solucionunad.onrender.com/api/emails/${selectedEmail.id}`, {method: "DELETE"});
-      setEmails((prev) => prev.filter((x) => x.id !== selectedEmail.id));
-      setSelectedEmail(null);
-      setReplyText("");
-      setFiles([]);
-    } catch (err) {
-      alert("No se pudo eliminar.");
-    }
-  }
+ async function handleDelete() {
+  if (!selectedEmail) return;
+  if (!window.confirm("¿Eliminar este correo?")) return;
+  try {
+    const API = process.env.NEXT_PUBLIC_API_URL || "https://reto1solucionunad.onrender.com";
+    const res = await fetch(`${API}/api/emails/${selectedEmail.id}`, { method: "DELETE" });
 
-  async function handleReply() {
-    if (!selectedEmail) return;
-    const to = extractEmail(selectedEmail.from_address);
-    const subject = selectedEmail.subject ? `Re: ${selectedEmail.subject}` : "Respuesta";
-    if (!replyText.trim() && files.length === 0) {
-      alert("Escribe un mensaje o adjunta archivos.");
+    if (!res.ok) {
+      const text = await res.text();
+      console.error("Error eliminando:", res.status, text);
+      alert("No se pudo eliminar (error del servidor).");
       return;
     }
-    try {
-      const form = new FormData();
-      form.append("to", to);
-      form.append("subject", subject);
-      form.append("message", replyText);
-      files.forEach((f) => form.append("files", f));
-     const res = await fetch("https://reto1solucionunad.onrender.com/api/reply", {method: "POST", body: form});
-      if (!res.ok) throw new Error(await res.text());
-      alert("Respuesta enviada.");
-      setReplyText("");
-      setFiles([]);
-    } catch (err) {
-      alert("Error enviando respuesta.");
-    }
+
+    setEmails((prev) => prev.filter((x) => x.id !== selectedEmail.id));
+    setSelectedEmail(null);
+    setReplyText("");
+    setFiles([]);
+  } catch (err) {
+    console.error("Error en delete:", err);
+    alert("No se pudo eliminar. Ver consola.");
   }
+}
+
+  async function handleReply() {
+  if (!selectedEmail) return;
+  const to = extractEmail(selectedEmail.from_address);
+  const subject = selectedEmail.subject ? `Re: ${selectedEmail.subject}` : "Respuesta";
+  if (!replyText.trim() && files.length === 0) {
+    alert("Escribe un mensaje o adjunta archivos.");
+    return;
+  }
+  try {
+    const API = process.env.NEXT_PUBLIC_API_URL || "https://reto1solucionunad.onrender.com";
+    const form = new FormData();
+    form.append("to", to);
+    form.append("subject", subject);
+    form.append("message", replyText);
+    files.forEach((f) => form.append("files", f));
+
+    // opcional: deshabilitar botón (puedes manejar un state `sending`)
+    // setSending(true);
+
+    const res = await fetch(`${API}/api/reply`, { method: "POST", body: form });
+
+    if (!res.ok) {
+      const text = await res.text();
+      console.error("Error reply:", res.status, text);
+      alert("Error enviando respuesta. Revisa consola.");
+      // setSending(false);
+      return;
+    }
+
+    alert("Respuesta enviada.");
+    setReplyText("");
+    setFiles([]);
+    // setSending(false);
+  } catch (err) {
+    console.error("Error enviando reply:", err);
+    alert("Error enviando respuesta. Revisa consola.");
+    // setSending(false);
+  }
+}
+
 
   const searchedEmails = emails.filter((e) => {
     const q = search.toLowerCase();
