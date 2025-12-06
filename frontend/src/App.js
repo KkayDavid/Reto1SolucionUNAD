@@ -128,9 +128,6 @@ export default function App() {
       return;
     }
 
-    const data = await res.json();
-    const saved = JSON.parse(localStorage.getItem("followDates") || "{}");
-
     const cleaned = data
       .map((e) => ({
         ...e,
@@ -273,7 +270,6 @@ export default function App() {
   
   function saveFollowDate() {
     if (!activeFollowEmail || !followDate) return;
-    const saved = JSON.parse(localStorage.getItem("followDates") || "{}");
     saved[activeFollowEmail.id] = followDate;
     localStorage.setItem("followDates", JSON.stringify(saved));
     setEmails((prev) => prev.map((e) => (e.id === activeFollowEmail.id ? { ...e, follow: followDate } : e)));
@@ -282,7 +278,6 @@ export default function App() {
   }
 
   function removeFollowDate(emailId) {
-    const saved = JSON.parse(localStorage.getItem("followDates") || "{}");
     delete saved[emailId];
     localStorage.setItem("followDates", JSON.stringify(saved));
     setEmails((prev) => prev.map((e) => (e.id === emailId ? { ...e, follow: null } : e)));
@@ -345,7 +340,6 @@ export default function App() {
     const today = new Date();
     const todayKey = today.toISOString().slice(0, 10); // YYYY-MM-DD
 
-    const saved = JSON.parse(localStorage.getItem("followDates") || "{}");
     const notified = JSON.parse(localStorage.getItem("notifiedMap") || "{}");
 
     Object.entries(saved).forEach(([id, dateStr]) => {
