@@ -1,0 +1,89 @@
+.calendar-wrap {
+  width: 100%;
+  height: 100vh;
+  background: rgba(0,0,0,0.75);
+  position: fixed;
+  top: 0;
+  left: 0;
+  backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.calendar-box {
+  width: 80%;
+  max-width: 900px;
+  background: white;
+  border-radius: 14px;
+  padding: 24px;
+  position: relative;
+  animation: fadeIn 0.3s ease;
+}
+
+.btn-close-calendar {
+  position: absolute;
+  right: 12px;
+  top: 12px;
+  border: none;
+  background: #ff4d4d;
+  color: white;
+  padding: 10px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.title-cal {
+  font-size: 28px;
+  margin-bottom: 12px;
+}
+
+.sub {
+  color: #555;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.calendar-day {
+  background: #f3f7ff;
+  padding: 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.calendar-day:hover {
+  background: #d9e6ff;
+}
+
+.btn-back {
+  margin-top: 10px;
+  background: #0d6efd;
+  padding: 10px 14px;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.date-title {
+  margin-top: 18px;
+  font-size: 22px;
+}
+
+.email-list {
+  margin-top: 16px;
+}
+
+.email-item {
+  padding: 10px;
+  background: #eef3ff;
+  margin-bottom: 10px;
+  border-radius: 8px;
+}

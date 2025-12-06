@@ -1,0 +1,433 @@
+/* --------------------------------------------------
+   ESTILOS GENERALES
+-------------------------------------------------- */
+body {
+  margin: 0;
+  padding: 0;
+  background: #f3f4f7;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+}
+
+.app-wrap {
+  max-width: 1280px;
+  margin: auto;
+  padding-bottom: 40px;
+}
+
+/* --------------------------------------------------
+   HEADER
+-------------------------------------------------- */
+.header {
+  width: 100%;
+  background-image: url("./header-bg.jpg");
+  background-size: cover;
+  background-position: center;
+  color: white;
+  padding: 20px 28px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 26px;
+  font-weight: 600;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+
+.logo-emoji {
+  font-size: 34px;
+}
+
+/* --------------------------------------------------
+   INPUT DE BÚSQUEDA
+-------------------------------------------------- */
+.search-input {
+  width: 100%;
+  padding: 14px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 15px;
+  outline: none;
+  background: white;
+  margin-bottom: 18px;
+}
+
+.search-input:focus {
+  border-color: #0078d4;
+  box-shadow: 0 0 6px rgba(0,120,212,0.4);
+}
+
+/* --------------------------------------------------
+   BOTONES CATEGORÍAS
+-------------------------------------------------- */
+.category-buttons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.category-buttons button {
+  padding: 8px 16px;
+  font-size: 14px;
+  border-radius: 20px;
+  border: none;
+  background: #e2e8f0;
+  color: #333;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.category-buttons button:hover {
+  background: #cbd5e1;
+}
+
+.category-buttons .active {
+  background: #0078d4;
+  color: white;
+}
+
+/* --------------------------------------------------
+   BOTONES SUPERIORES
+-------------------------------------------------- */
+.top-buttons {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.btn {
+  padding: 10px 18px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  color: white;
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+.btn:hover {
+  opacity: 0.9;
+}
+
+.btn-refresh { background: #0078d4; }
+.btn-excel { background: #0f9d58; }
+.btn-pdf { background: #d32f2f; }
+
+/* --------------------------------------------------
+   TABLA
+-------------------------------------------------- */
+.email-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.email-table thead {
+  background: #004aad;
+  color: white;
+}
+
+.email-table th,
+.email-table td {
+  padding: 14px;
+  border-bottom: 1px solid #e2e8f0;
+  font-size: 14px;
+}
+
+.email-row {
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.email-row:hover {
+  background: #eef6ff;
+}
+
+/* --------------------------------------------------
+   BADGES CATEGORÍAS
+-------------------------------------------------- */
+.badge-container {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.badge {
+  padding: 4px 10px;
+  border-radius: 14px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+/* colores */
+.badge-urgente {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.badge-seguridad {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.badge-respuesta {
+  background: #d1fae5;
+  color: #047857;
+}
+
+.badge-general {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+/* --------------------------------------------------
+   PAGINACIÓN
+-------------------------------------------------- */
+.pagination {
+  margin-top: 14px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.pagination button {
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #e2e8f0;
+  border: none;
+  transition: 0.2s;
+}
+
+.pagination button:hover {
+  background: #cbd5e1;
+}
+
+/* --------------------------------------------------
+   MODAL — ESTILO PROFESIONAL
+-------------------------------------------------- */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.55);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+  z-index: 20;
+}
+
+.modal-box {
+  width: 720px;
+  max-height: 92vh;
+  overflow-y: auto;
+  background: white;
+  border-radius: 14px;
+  padding: 28px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  animation: fadeIn 0.25s ease;
+  border-top: 6px solid #0078d4;
+}
+
+.modal-title {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.email-content-box {
+  white-space: pre-wrap;
+  padding: 14px;
+  background: #f1f5f9;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  max-height: 280px;
+  overflow-y: auto;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+/* --------------------------------------------------
+   INPUT ARCHIVOS
+-------------------------------------------------- */
+.file-input-wrapper {
+  margin: 10px 0 18px 0;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.file-input-label {
+  background: #0078d4;
+  color: white;
+  padding: 10px 18px;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.file-input-label:hover {
+  background: #005ea6;
+}
+
+.file-input {
+  display: none;
+}
+
+.file-text {
+  font-size: 13px;
+  color: #555;
+}
+
+/* --------------------------------------------------
+   RESPUESTA
+-------------------------------------------------- */
+.reply-textarea {
+  width: 100%;
+  height: 140px;
+  resize: vertical;
+  padding: 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 14px;
+  background: #f9fafb;
+}
+
+.reply-buttons {
+  margin-top: 14px;
+  display: flex;
+  gap: 12px;
+}
+
+.btn-send {
+  background: #0078d4;
+  color: white;
+  padding: 10px 18px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-delete {
+  background: #dc2626;
+  color: white;
+  padding: 10px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.btn-close {
+  margin-top: 22px;
+  width: 100%;
+  padding: 14px;
+  background: #374151;
+  border: none;
+  color: white;
+  font-size: 15px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+/* Animación modal */
+@keyframes fadeIn {
+  from { transform: scale(0.95); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
+
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #eef3ff;
+}
+
+.login-box {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  width: 350px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  text-align: center;
+}
+
+.login-input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 15px;
+}
+
+.login-btn {
+  width: 100%;
+  padding: 12px;
+  background: #0a4b9a;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.login-btn:hover {
+  background: #083a78;
+}
+.btn-logout {
+  background: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: 0.2s ease-in-out;
+  margin-left: auto;
+  margin-right: 12px;
+}
+
+.btn-logout:hover {
+  background: #e04343;
+}
+
+
+.btn-logout-top {
+  background: #c62828;
+  padding: 10px 16px;
+  border-radius: 6px;
+  border: none;
+  color: white;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.btn-logout-top:hover {
+  background: #a01f1f;
+}
+.btn-logout-top {
+  background: #c62828;
+  padding: 10px 18px;
+  border-radius: 6px;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 15px;
+  transition: 0.25s;
+}
+
+.btn-logout-top:hover {
+  background: #a01f1f;
+}
