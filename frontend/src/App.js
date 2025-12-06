@@ -112,15 +112,38 @@ export default function App() {
     window.location.reload();
   }
 
-  async function fetchEmails() {
-    try {
-   const res = await fetch("https://reto1solucionunad.onrender.com/api/emails");
+ async function fetchEmails() {
+  try {
+    const API = process.env.NEXT_PUBLIC_API_URL || "https://reto1solucionunad.onrender.com";
+    const res = await fetch(`${API}/api/emails/`, { method: "GET" });
 
-if (!res.ok) {
-  console.error("Error HTTP:", res.status, await res.text());
-  alert("No se pudo cargar correos (error del servidor).");
-  return;
+    if (!res.ok) {
+      const text = await res.text();
+      console.error("Error HTTP al cargar emails:", res.status, text);
+      alert("No se pudo cargar correos (error del servidor). Revisa consola.");
+      return;
+    }
+
+    const data = await res.json();
+    const saved = JSON.parse(localStorage.getItem("followDates") || "{}");
+
+    const cleaned = data
+      .map((e) => ({
+        ...e,
+        from_address: decodeMime(e.from_address || ""),
+        subject: decodeMime(e.subject || ""),
+        category: getCategory(e),
+        follow: saved[e.id] || null,
+      }))
+      .sort((a, b) => new Date(b.received_at) - new Date(a.received_at));
+
+    setEmails(cleaned);
+  } catch (err) {
+    console.error("Error fetch emails", err);
+    alert("No se pudo conectar al servidor. Revisa la consola.");
+  }
 }
+
 
 const data = await res.json();
 
