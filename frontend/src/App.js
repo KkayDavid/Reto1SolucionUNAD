@@ -115,7 +115,14 @@ export default function App() {
   async function fetchEmails() {
     try {
    const res = await fetch("https://reto1solucionunad.onrender.com/api/emails");
-   const data = await res.json();
+
+if (!res.ok) {
+  console.error("Error HTTP:", res.status, await res.text());
+  alert("No se pudo cargar correos (error del servidor).");
+  return;
+}
+
+const data = await res.json();
 
       const saved = JSON.parse(localStorage.getItem("followDates") || "{}");
 
