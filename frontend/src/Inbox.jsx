@@ -8,7 +8,7 @@ function Inbox() {
   }, []);
 
   const loadEmails = async () => {
-    const res = await fetch("http://localhost:8000/api/emails/");
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/emails/`);
     const data = await res.json();
     setEmails(data);
   };
@@ -55,3 +55,4 @@ const td = {
 };
 
 export default Inbox;
+
