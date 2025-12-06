@@ -149,28 +149,6 @@ export default function App() {
 }
 
 
-const data = await res.json();
-
-      const saved = JSON.parse(localStorage.getItem("followDates") || "{}");
-
-      const cleaned = data
-        .map((e) => ({
-          ...e,
-          from_address: decodeMime(e.from_address || ""),
-          subject: decodeMime(e.subject || ""),
-          category: getCategory(e),
-          follow: saved[e.id] || null,
-        }))
-        .sort((a, b) => new Date(b.received_at) - new Date(a.received_at));
-
-      setEmails(cleaned);
-    } catch (err) {
-      console.error("Error fetch emails", err);
-      alert("Error cargando correos.");
-    }
-  }
-
-
   function exportToExcel() {
     const rows = emails.map((e) => ({
       ID: e.id,
